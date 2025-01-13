@@ -44,5 +44,114 @@ h6 {
 }
 
 body {
-  background-color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
+
+footer {
+  position: fixed;
+  bottom: 0;
+}
+
+/* styles relating to hamburger drop down menu */
+header {
+  /* position: relative; */
+  padding: 1rem 2rem;
+  transition: 0.4s;
+}
+
+#icon-container {
+  display: inline-block;
+}
+
+.drop-down-button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #404040;
+  color: #f5f5f5;
+  padding: 0.25rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+}
+
+#menu-text {
+  user-select: none;
+}
+
+.bar {
+  width: 35px;
+  height: 5px;
+  background-color: #f5f5f5;
+  margin: 6px 0;
+  transition: 0.3s;
+  border-radius: 0.25rem;
+}
+
+.active {
+  background-color: #f5f5f5;
+  color: #404040;
+}
+
+.active .bar {
+  background-color: #404040;
+}
+
+.active #bar1 {
+  transform: translate(0, 11px) rotate(-45deg);
+}
+
+.active #bar2 {
+  opacity: 0;
+}
+
+.active #bar3 {
+  transform: translate(0, -11px) rotate(45deg);
+}
+
+#menu {
+  position: absolute;
+  z-index: 1000;
+  max-height: 0;
+  transition: all 0.3s ease-out;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.menu-item {
+  margin-top: 0.5rem;
+  width: 100%;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.menu-item:hover,
+.menu-item:active {
+  background-color: #404040;
+  color: #f5f5f5;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+  #menu-text {
+    display: none;
+  }
+
+  #menu-div {
+    position: fixed;
+    left: 2rem;
+  }
+}
+
+/* end styles relating to drop down hamburger menu */
+
+/* .carousel-div {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+} */
