@@ -84,9 +84,8 @@ h6 {
   font-family: inherit;
   color: #333;
   border-radius: 50%;
-  height: 5.5rem;
-  width: 5.5rem;
-  font-size: 3.25rem;
+  font-size: 2rem;
+  padding: 0 0.8rem 0.4rem;
   cursor: pointer;
 }
 

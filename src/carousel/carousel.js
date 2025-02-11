@@ -92,6 +92,12 @@ class carousel {
     });
   }
 
+  #createDots(container) {
+    const dotsContainer = document.createElement("div");
+    dotsContainer.classList.add("carousel-dots");
+    container.appendChild(dotsContainer);
+  }
+
   initCarousel() {
     const container = this.#createContainer("carousel-container");
     const leftButton = this.#createButton.call(this, "left");
@@ -99,6 +105,7 @@ class carousel {
     const rightButton = this.#createButton.call(this, "right");
     container.appendChild(rightButton);
     this.#addImagesToCarousel(container);
+    this.#createDots(container);
     this.parentContainer.appendChild(container, "beforeend");
   }
 }
