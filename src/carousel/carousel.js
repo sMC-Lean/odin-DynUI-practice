@@ -29,7 +29,7 @@ class carousel {
     this.currSlide = 0;
     this.maxSlideIndex = this.content.images.length - 1;
     this.initCarousel();
-    this.slides = document.querySelectorAll(`.${this.somewhatUniqueName}`);
+    // this.slides = document.querySelectorAll(`.${this.somewhatUniqueName}`);
   }
 
   #createContainer(className) {
@@ -50,6 +50,7 @@ class carousel {
       this.currSlide++;
     }
     this.#goToSlide(this.currSlide);
+    this.#activateDot(this.currSlide);
   }
 
   #prevSlide() {
@@ -58,6 +59,7 @@ class carousel {
       this.currSlide--;
     }
     this.#goToSlide(this.currSlide);
+    this.#activateDot(this.currSlide);
   }
 
   #createButton(direction) {
@@ -92,10 +94,45 @@ class carousel {
     });
   }
 
-  #createDots(container) {
+  #createDots(container, slides) {
     const dotsContainer = document.createElement("div");
     dotsContainer.classList.add("carousel-dots");
+    // console.log(slides);
+    slides.forEach((_, index) => {
+      dotsContainer.insertAdjacentHTML(
+        "beforeend",
+        `<button class="carousel-dots_dot ${this.somewhatUniqueName}" data-slide="${index}"></button>`
+      );
+    });
     container.appendChild(dotsContainer);
+    dotsContainer.addEventListener("click", (event) => {
+      this.#handleDotClick.call(this, event);
+    });
+  }
+
+  #activateDot(slide) {
+    // console.log(
+    //   document.querySelectorAll(`.carousel-dots_dot.${this.somewhatUniqueName}`)
+    // );
+
+    document
+      .querySelectorAll(`.carousel-dots_dot.${this.somewhatUniqueName}`)
+      .forEach((dot) => dot.classList.remove("carousel-dots_dot-active"));
+    document
+      .querySelector(
+        `.carousel-dots_dot.${this.somewhatUniqueName}[data-slide="${slide}"`
+      )
+      .classList.add("carousel-dots_dot-active");
+  }
+
+  #handleDotClick(event) {
+    if (event.target.classList.contains(`${this.somewhatUniqueName}`)) {
+      console.log("dot clicked");
+      const { slide } = event.target.dataset;
+      this.currSlide = slide;
+      this.#goToSlide(this.currSlide);
+      this.#activateDot(slide);
+    }
   }
 
   initCarousel() {
@@ -105,8 +142,10 @@ class carousel {
     const rightButton = this.#createButton.call(this, "right");
     container.appendChild(rightButton);
     this.#addImagesToCarousel(container);
-    this.#createDots(container);
     this.parentContainer.appendChild(container, "beforeend");
+    this.slides = document.querySelectorAll(`.${this.somewhatUniqueName}`);
+    this.#createDots.call(this, container, this.slides);
+    this.#activateDot(this.currSlide);
   }
 }
 
