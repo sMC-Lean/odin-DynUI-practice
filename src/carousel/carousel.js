@@ -127,7 +127,6 @@ class carousel {
 
   #handleDotClick(event) {
     if (event.target.classList.contains(`${this.somewhatUniqueName}`)) {
-      console.log("dot clicked");
       const { slide } = event.target.dataset;
       this.currSlide = slide;
       this.#goToSlide(this.currSlide);
